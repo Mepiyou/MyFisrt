@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First - Beauté d'un parfum authentique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Masquer la barre de défilement tout en gardant la fonctionnalité */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari and Opera */
+        }
+        
+        /* Style pour le défilement tactile */
+        .scrollbar-hide {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#c9a77c',
+                        accent: '#8b7355',
+                    },
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white font-montserrat">
+    <!-- Conteneur pour les notifications -->
+    <div id="notification-container"></div>
+
+    <!-- Header -->
+    <header class="fixed w-full bg-primary text-white z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="dan-removebg-preview.png" alt="My First" class="h-12">
+                <span class="ml-4 text-xl font-playfair">My First</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#accueil" class="hover:text-secondary transition-colors">Accueil</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://www.instagram.com/my_firstperfume?utm_source=qr&igsh=b29wZ2YzN3FyeWVq" 
+                   target="_blank" 
+                   class="instagram-link hover:text-secondary transition-colors">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <button id="cart-button" class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-secondary text-primary text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+                <button class="md:hidden text-2xl" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-primary z-40 hidden">
+        <div class="container mx-auto px-4 py-20">
+            <div class="flex flex-col items-center space-y-6">
+                <a href="#accueil" class="text-white text-xl hover:text-secondary transition-colors">Accueil</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="cart-header">
+            <h2 class="text-2xl font-playfair">Votre Panier</h2>
+            <button id="close-cart" class="text-2xl">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span class="text-lg">Total</span>
+                <div id="cart-total" class="cart-total-amount">0.00 €</div>
+            </div>
+            <a href="#" id="whatsapp-order" class="whatsapp-button">
+                <i class="fab fa-whatsapp mr-2"></i>Commander via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="pt-24 md:pt-32 bg-gradient-to-b from-primary to-black text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24 text-center">
+            <h1 class="text-4xl md:text-6xl font-playfair mb-6">My First</h1>
+            <p class="text-xl md:text-2xl mb-8">Beauté d'un parfum authentique</p>
+            <p class="text-lg md:text-xl text-secondary italic">"L'élégance se respire, la beauté se vit"</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+        <div class="container mx-auto px-4">
+            <!-- Filters -->
+            <div class="flex overflow-x-auto pb-4 mb-12 scrollbar-hide">
+                <div class="flex space-x-4 min-w-max px-4">
+                    <button class="filter-btn active px-6 py-2 border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors whitespace-nowrap" data-category="all">Tous</button>
+                    <button class="filter-btn px-6 py-2 border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors whitespace-nowrap" data-category="homme">Hommes</button>
+                    <button class="filter-btn px-6 py-2 border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors whitespace-nowrap" data-category="femme">Femmes</button>
+                    <button class="filter-btn px-6 py-2 border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors whitespace-nowrap" data-category="enfant">Enfants</button>
+                    <button class="filter-btn px-6 py-2 border border-secondary rounded-full hover:bg-secondary hover:text-white transition-colors whitespace-nowrap" data-category="coffret">Coffrets</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products will be added here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 My First - Beauté d'un parfum authentique. Tous droits réservés a MB14.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
