@@ -3,7 +3,7 @@ let products = [];
 let currentEditIndex = -1;
 const CONVERSION_RATE = 655.957; // Taux de conversion fixe EUR vers FCFA
 const STORAGE_KEY = 'parfums_data';
-const EXCEL_FILE = 'Gestion_Parfums_Zara.xlsx';
+const EXCEL_FILE = '../assets/Gestion_Parfums_Zara.xlsx';
 
 // Fonction pour afficher une notification
 function showNotification(message, type = 'success') {

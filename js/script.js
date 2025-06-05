@@ -73,7 +73,7 @@ async function loadProducts() {
     try {
         console.log('Début du chargement des produits...');
         
-        const response = await fetch('Gestion_Parfums_Zara.xlsx');
+        const response = await fetch('../assets/Gestion_Parfums_Zara.xlsx');
         if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status} - Impossible de charger le fichier Excel`);
         }

@@ -25,7 +25,7 @@ const Parfum = mongoose.model('Parfum', parfumSchema);
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // Servir les fichiers statiques du dossier courant
+app.use(express.static('../')); // Servir les fichiers statiques du dossier parent
 
 // Route pour lire tous les parfums
 app.get('/api/parfums', async (req, res) => {
