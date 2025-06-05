@@ -1,8 +1,3 @@
-// Vérification de la connexion
-if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'login.html';
-}
-
 // Variables globales
 let products = [];
 let currentEditIndex = -1;
