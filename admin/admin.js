@@ -1,3 +1,8 @@
+// Vérification de la connexion
+if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'login.html';
+}
+
 // Variables globales
 let products = [];
 let currentEditIndex = -1;
@@ -329,5 +334,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && !document.getElementById('product-modal').classList.contains('hidden')) {
             closeModal();
         }
+    });
+
+    // Fonction de déconnexion
+    document.getElementById('logout-btn').addEventListener('click', function() {
+        localStorage.removeItem('adminLoggedIn');
+        window.location.href = 'login.html';
     });
 }); 
