@@ -1,7 +1,7 @@
 // Variables globales
 let products = [];
 let currentEditIndex = -1;
-const CONVERSION_RATE = 655.957; // Taux de conversion fixe EUR vers FCFA
+const CONVERSION_RATE = 680; // Taux de conversion fixe EUR vers FCFA
 const STORAGE_KEY = 'parfums_data';
 const EXCEL_FILE = '../assets/Gestion_Parfums_Zara.xlsx';
 
